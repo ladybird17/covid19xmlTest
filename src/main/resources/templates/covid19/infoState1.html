@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}"></link>
+<script src="/js/jquery-3.5.1.js" th:src="@{/js/jquery-3.5.1.js}"></script>
+<script src="/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#btnPublicXmlDataLoad").on("click",function(){
+			//폼에서 값을 가져와서 sendData라는 object형 변수에 저장
+			var startDt = $("#startDt").val();
+			var endDt = $("#endDt").val();
+			var sendData = {startCreateDt : startDt, endCreateDt : endDt};
+			
+			$.ajax({
+				url: "/covid19/infoState2",
+				type: "POST",
+				data: sendData, //sendData 가 controller로 간다.
+				success: function(data){
+					for(var i =0; i<data.length; i++){
+						var result = "<tr>";
+						result += "<td>" + data[i].stateDt + "</td>";
+						result += "<td>" + data[i].stateTime + "</td>";
+						result += "<td>" + data[i].decideCnt + "</td>";
+						result += "<td>" + data[i].clearCnt + "</td>";
+						result += "<td>" + data[i].careCnt + "</td>";
+						result += "<td>" + data[i].deathCnt + "</td>";
+						result += "<td>" + data[i].examCnt + "</td>";
+						result += "<td>" + data[i].accExamCnt + "</td>";
+						result += "</tr>";
+						
+						$("#ajaxTable tbody").append(result);
+						
+						console.log(data[i].stateDt);
+						console.log(data[i].stateTime);
+						console.log(data[i].decideCnt);
+						console.log(data[i].clearCnt);
+						console.log(data[i].careCnt);
+						console.log(data[i].deathCnt);
+						console.log(data[i].examCnt);
+						console.log(data[i].accExamCnt);
+					}
+				},
+				error : function(){
+					alert("ajax 통신 오류");
+				}
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<header class="container">
+		<div class="jumbotron">
+			<h1>코로나 현황</h1>
+		</div>
+	</header>
+	<main class="container">
+		<section class="row">
+			<div class="mx-auto">
+				<table class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<!-- 각각의 정보는 공공데이터 사이트 참고문서에서 확인 가능 -->
+							<th>기준일</th>
+							<th>기준시간</th>
+							<th>확진자 수</th>
+							<th>격리해제 수</th>
+							<th>치료중 환자 수</th>
+							<th>사망자 수</th>
+							<th>검사 진행 수</th>
+							<th>누적 검사 수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${#lists.size(covid19Datas)} >0" th:each="list : ${covid19Datas}">
+							<td th:text="${list.stateDt}"></td>
+							<td th:text="${list.stateTime}"></td>
+							<td th:text="${list.decideCnt}"></td>
+							<td th:text="${list.clearCnt}"></td>
+							<td th:text="${list.careCnt}"></td>
+							<td th:text="${list.deathCnt}"></td>
+							<td th:text="${list.examCnt}"></td>
+							<td th:text="${list.accExamCnt}"></td>
+						</tr>
+						<tr th:unless="${#lists.size(covid19Datas)} > 0">
+							<td colspan="5">조회된 내용이 없습니다.</td>
+						</tr>
+					</tbody>
+				</table>
+				<br><hr><br>
+				<table id="ajaxTable" class="table table-hover table-striped">
+					<thead>
+						<th>기준일</th>
+						<th>기준시간</th>
+						<th>확진자 수</th>
+						<th>격리해제 수</th>
+						<th>치료중 환자 수</th>
+						<th>사망자 수</th>
+						<th>검사 진행 수</th>
+						<th>누적 검사 수</th>
+					</thead>
+					<tbody>
+					
+					</tbody>
+				</table>
+				<div class="form-group">
+					<label for="startDt">시작날짜</label>
+					<input type="text" class="form-control" id="startDt">
+				</div>
+				<div class="form-group">
+					<label for="endDt">종료날짜</label>
+					<input type="text" class="form-control" id="endDt">
+				</div>
+				<button class="btn btn-success" id="btnPublicXmlDataLoad">공공데이터포털 데이터 로드</button>
+			</div>
+		</section>
+	</main>
+</body>
+</html>

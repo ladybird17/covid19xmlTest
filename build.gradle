@@ -1,0 +1,44 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.bitc'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	/*
+	- jaxb는 자바프로젝트에서 xml파일을
+	쉽게 파싱하기 위한 라이브러리임.
+	- java 9버전 이후로 기본 자바 api에서 jaxb가 빠짐.
+	- 스프링부트에서는 spring-boot-starter-web에 
+	jaxb가 포함되어있어서 선언만 해주면 된다.
+	*/
+	compile 'javax.xml.bind:jaxb-api'
+	compile 'javax.activation:activation'
+	compile 'org.glassfish.jaxb:jaxb-runtime'
+}
+
+test {
+	useJUnitPlatform()
+}
