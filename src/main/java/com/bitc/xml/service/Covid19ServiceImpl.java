@@ -52,6 +52,8 @@ public class Covid19ServiceImpl implements Covid19Service {
 		return itemList;
 	}
 	
+	
+	//직접 범위 지정 후 가져오기(매일 업데이트된 데이터를 가져올 수 있음)
 	@Override
 	public List<Covid19InfoStateItemDto> getItemListRange(String strUrl) throws Exception{
 		List<Covid19InfoStateItemDto> itemList = null; //반환값

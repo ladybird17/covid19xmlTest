@@ -30,6 +30,7 @@ public class Covid19Controller {
 		return mv;
 	}
 	
+	//범위 지정해서 직접 가져오기(매일 새로 업데이트된 내용도 가져올 수 있다)
 	@ResponseBody
 	@RequestMapping(value="/covid19/infoState2",method=RequestMethod.POST)
 	public Object covid19InfoState2(@RequestParam Map<String, String> param) throws Exception{
