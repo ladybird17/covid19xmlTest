@@ -6,17 +6,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="item")
 public class Covid19InfoStateItemDto {
 	private String accDefRate;
-	private int accExamCnt;
-	private int accExamCompCnt;
-    private int careCnt;
-    private int clearCnt;
+	private String accExamCnt;
+	private String accExamCompCnt;
+    private String careCnt;
+    private String clearCnt;
     private String createDt;
-    private int deathCnt;
-    private int decideCnt;
-    private int examCnt;
-    private int resutlNegCnt;
-    private int seq;
-    private int stateDt;
+    private String deathCnt;
+    private String decideCnt;
+    private String examCnt;
+    private String resultNegCnt;
+    private String seq;
+    private String stateDt;
     private String stateTime;
     private String updateDt;
     
@@ -27,28 +27,28 @@ public class Covid19InfoStateItemDto {
 	public void setAccDefRate(String accDefRate) {
 		this.accDefRate = accDefRate;
 	}
-	public int getAccExamCnt() {
+	public String getAccExamCnt() {
 		return accExamCnt;
 	}
-	public void setAccExamCnt(int accExamCnt) {
+	public void setAccExamCnt(String accExamCnt) {
 		this.accExamCnt = accExamCnt;
 	}
-	public int getAccExamCompCnt() {
+	public String getAccExamCompCnt() {
 		return accExamCompCnt;
 	}
-	public void setAccExamCompCnt(int accExamCompCnt) {
+	public void setAccExamCompCnt(String accExamCompCnt) {
 		this.accExamCompCnt = accExamCompCnt;
 	}
-	public int getCareCnt() {
+	public String getCareCnt() {
 		return careCnt;
 	}
-	public void setCareCnt(int careCnt) {
+	public void setCareCnt(String careCnt) {
 		this.careCnt = careCnt;
 	}
-	public int getClearCnt() {
+	public String getClearCnt() {
 		return clearCnt;
 	}
-	public void setClearCnt(int clearCnt) {
+	public void setClearCnt(String clearCnt) {
 		this.clearCnt = clearCnt;
 	}
 	public String getCreateDt() {
@@ -57,40 +57,40 @@ public class Covid19InfoStateItemDto {
 	public void setCreateDt(String createDt) {
 		this.createDt = createDt;
 	}
-	public int getDeathCnt() {
+	public String getDeathCnt() {
 		return deathCnt;
 	}
-	public void setDeathCnt(int deathCnt) {
+	public void setDeathCnt(String deathCnt) {
 		this.deathCnt = deathCnt;
 	}
-	public int getDecideCnt() {
+	public String getDecideCnt() {
 		return decideCnt;
 	}
-	public void setDecideCnt(int decideCnt) {
+	public void setDecideCnt(String decideCnt) {
 		this.decideCnt = decideCnt;
 	}
-	public int getExamCnt() {
+	public String getExamCnt() {
 		return examCnt;
 	}
-	public void setExamCnt(int examCnt) {
+	public void setExamCnt(String examCnt) {
 		this.examCnt = examCnt;
 	}
-	public int getResutlNegCnt() {
-		return resutlNegCnt;
+	public String getResultNegCnt() {
+		return resultNegCnt;
 	}
-	public void setResutlNegCnt(int resutlNegCnt) {
-		this.resutlNegCnt = resutlNegCnt;
+	public void setResultNegCnt(String resutlNegCnt) {
+		this.resultNegCnt = resutlNegCnt;
 	}
-	public int getSeq() {
+	public String getSeq() {
 		return seq;
 	}
-	public void setSeq(int seq) {
+	public void setSeq(String seq) {
 		this.seq = seq;
 	}
-	public int getStateDt() {
+	public String getStateDt() {
 		return stateDt;
 	}
-	public void setStateDt(int stateDt) {
+	public void setStateDt(String stateDt) {
 		this.stateDt = stateDt;
 	}
 	public String getStateTime() {

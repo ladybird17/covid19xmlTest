@@ -50,6 +50,40 @@
 				}
 			});
 		});
+		
+		$("#btnAjaxLoad2").on("click",function(){
+			var sendData = {
+					startCreateDt : $("#startDt2").val(), 
+					endCreateDt : $("#endDt2").val()
+			}; //object형식
+			
+			$.ajax({
+				url: "/covid19/infoState3",
+				type: "post",
+				data: sendData, //서버에 전송할 데이터
+				dataType: "json", //ajax 통신 후 전송받을 데이터의 타입을 json으로 결정함(text, json)
+				success : function(data){
+					alert(data);
+					for(var i = 0; i<data.length; i++){
+						var result = "<tr>";
+						result += "<td>" + data[i].stateDt + "</td>";
+						result += "<td>" + data[i].stateTime + "</td>";
+						result += "<td>" + data[i].decideCnt + "</td>";
+						result += "<td>" + data[i].clearCnt + "</td>";
+						result += "<td>" + data[i].careCnt + "</td>";
+						result += "<td>" + data[i].deathCnt + "</td>";
+						result += "<td>" + data[i].examCnt + "</td>";
+						result += "<td>" + data[i].accExamCnt + "</td>";
+						result += "</tr>";
+						
+						$("#ajaxTable2 tbody").append(result);
+					}
+				},
+				error : function(){
+					alert("ajax 통신에 오류가 발생했습니다.");
+				}
+			});
+		});
 	});
 </script>
 </head>
@@ -119,6 +153,38 @@
 				<button class="btn btn-success" id="btnPublicXmlDataLoad">공공데이터포털 데이터 로드</button>
 			</div>
 		</section>
+		<br><hr><br>
+		<!-- DB사용한 AJAX 테이블 -->
+		<section class="row">
+			<div class="col-sm"> <!-- 자동으로 크기 만들어줌 -->
+				<table id="ajaxTable2" class="table table-hover table-striped">
+					<thead>
+						<th>기준일</th>
+						<th>기준시간</th>
+						<th>확진자 수</th>
+						<th>격리해제 수</th>
+						<th>치료중 환자 수</th>
+						<th>사망자 수</th>
+						<th>검사 진행 수</th>
+						<th>누적 검사 수</th>
+					</thead>
+					<tbody>
+					
+					</tbody>
+				</table>
+				<div class="form-group">
+					<label for="startDt2">시작날짜</label>
+					<input type="text" class="form-control" id="startDt2">
+				</div>
+				<div class="form-group">
+					<label for="endDt2">종료날짜</label>
+					<input type="text" class="form-control" id="endDt2">
+				</div>
+				<button id="btnAjaxLoad2" class="btn btn-primary btn-block">DB에서 데이터 로드</button>
+			</div>
+		</section>
 	</main>
+	<footer class="jumbotron mt-3 mb-0">
+	</footer>
 </body>
 </html>

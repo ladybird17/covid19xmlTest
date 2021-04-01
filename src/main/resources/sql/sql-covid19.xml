@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org.dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitc.xml.mapper.Covid19InfoStateMapper">
+	<!-- mapper파일의 getItemList 메소드 -->
+	<select id="getDbItemList" resultType="com.bitc.xml.dto.Covid19InfoStateItemDto">
+		<![CDATA[
+			SELECT 
+				seq, state_dt, state_time, 
+				decide_cnt, clear_cnt, care_cnt, 
+				death_cnt, exam_cnt, acc_exam_cnt
+			FROM
+				covid19state
+		]]>
+	</select>
+	<select id="getDbItemListRange" parameterType="String" resultType="com.bitc.xml.dto.Covid19InfoStateItemDto">
+		<![CDATA[
+			SELECT 
+				seq, state_dt, state_time, 
+				decide_cnt, clear_cnt, care_cnt, 
+				death_cnt, exam_cnt, acc_exam_cnt
+			FROM
+				covid19state
+			WHERE
+				create_dt > #{startDt}
+			AND 
+				create_dt < #{endDt}
+		]]>
+	</select>
+	<insert id="setDbItem" parameterType="com.bitc.xml.dto.Covid19InfoStateItemDto">
+		<![CDATA[
+			INSERT INTO covid19state 
+				(seq, state_dt, state_time, 
+				decide_cnt, clear_cnt, exam_cnt, 
+				death_cnt, care_cnt, result_neg_cnt, 
+				acc_exam_cnt, acc_exam_comp_cnt, 
+				acc_def_rate, create_dt, update_dt)
+			VALUES
+				(
+					#{seq}, #{stateDt}, #{stateTime}, 
+					#{decideCnt}, #{clearCnt}, #{examCnt}, 
+					#{deathCnt}, #{careCnt}, #{resultNegCnt}, 
+					#{accExamCnt}, #{accExamCompCnt}, 
+					#{accDefRate}, #{createDt}, #{updateDt}
+				)
+
+		]]>
+	</insert>
+	<insert id="setDbItemList" parameterType="com.bitc.xml.dto.Covid19InfoStateItemDto">
+		<![CDATA[
+			INSERT INTO covid19state 
+				(seq, state_dt, state_time, 
+				decide_cnt, clear_cnt, exam_cnt, 
+				death_cnt, care_cnt, result_neg_cnt, 
+				acc_exam_cnt, acc_exam_comp_cnt, 
+				acc_def_rate, create_dt, update_dt)
+			VALUES
+		]]>
+		<foreach collection="list" item="item" separator=",">
+			(	
+				#{item.seq}, #{item.stateDt}, #{item.stateTime}, 
+				#{item.decideCnt}, #{item.clearCnt}, #{item.examCnt}, 
+				#{item.deathCnt}, #{item.careCnt}, #{item.resultNegCnt}, 
+				#{item.accExamCnt}, #{item.accExamCompCnt}, 
+				#{item.accDefRate}, #{item.createDt}, #{item.updateDt}
+			)
+		</foreach>
+	</insert>
+</mapper>

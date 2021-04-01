@@ -28,15 +28,17 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
 	/*
-	- jaxb는 자바프로젝트에서 xml파일을
-	쉽게 파싱하기 위한 라이브러리임.
-	- java 9버전 이후로 기본 자바 api에서 jaxb가 빠짐.
 	- 스프링부트에서는 spring-boot-starter-web에 
 	jaxb가 포함되어있어서 선언만 해주면 된다.
 	*/
 	compile 'javax.xml.bind:jaxb-api'
 	compile 'javax.activation:activation'
 	compile 'org.glassfish.jaxb:jaxb-runtime'
+	
+	//DB연동을 위해 DB(mysql)과 mybatis 부분 추가
+	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+	
 }
 
 test {
